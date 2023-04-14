@@ -6,21 +6,32 @@ import { Button, Input, Text } from '@rneui/base'
 
 import { StatusBar } from 'expo-status-bar'
 
-const RegisterScreen = ({ navigation }) => {
+import { auth } from '../firebase'
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
+
+const RegisterScreen = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [imageUrl, setImageUrl] = useState('')
 
-  //doesn't work on android, so appledicks wont see this too
-
-  // useLayoutEffect(() => {
-  //   navigation.setOptions({
-  //     headerBackTitle: 'Abc',
-  //   })
-  // }, [navigation])
-
-  const register = () => {}
+  const register = async () => {
+    try {
+      const authUser = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      )
+      await updateProfile(authUser.user, {
+        displayName: name,
+        photoURL:
+          imageUrl ||
+          'https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png',
+      })
+    } catch (error) {
+      alert(error.message)
+    }
+  }
 
   return (
     <KeyboardAvoidingView style={styles.container}>
