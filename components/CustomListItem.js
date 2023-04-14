@@ -3,13 +3,13 @@ import React from 'react'
 
 import { ListItem, Avatar } from '@rneui/base'
 
-const CustomListItem = () => {
+const CustomListItem = ({ id, chatName, enterChat }) => {
   return (
     <ListItem>
       <Avatar
         rounded
         source={{
-          uri: 'https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png',
+          uri: 'https://www.mtsolar.us/wp-content/uploads/2020/04/avatar-placeholder.png',
         }}
       />
 

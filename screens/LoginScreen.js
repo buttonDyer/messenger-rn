@@ -3,9 +3,12 @@ import { React, useState, useEffect } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
 
 import { Button, Input, Image } from '@rneui/base'
+
 import { StatusBar } from 'expo-status-bar'
 
 import { auth } from '../firebase'
+
+import { signInWithEmailAndPassword } from 'firebase/auth'
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
@@ -22,7 +25,13 @@ const LoginScreen = ({ navigation }) => {
     return unsubscribe
   }, [])
 
-  const signIn = () => {}
+  const signIn = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password)
+    } catch (error) {
+      alert(error.message)
+    }
+  }
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -31,7 +40,7 @@ const LoginScreen = ({ navigation }) => {
         source={{
           uri: 'https://i1.sndcdn.com/artworks-ufXX9P49z3xnCzXY-Q5OaYQ-t500x500.jpg',
         }}
-        style={{ width: 200, height: 200 }}
+        style={{ width: 200, height: 200, borderRadius: 20, marginBottom: 25 }}
       />
       <View style={styles.inputContainer}>
         <Input
@@ -47,6 +56,7 @@ const LoginScreen = ({ navigation }) => {
           type="password"
           value={password}
           onChangeText={(text) => setPassword(text)}
+          onSubmitEditing={signIn}
         />
       </View>
       <Button
@@ -58,6 +68,7 @@ const LoginScreen = ({ navigation }) => {
       <Button
         onPress={() => navigation.navigate('Register')}
         titleStyle={{ color: '#3C1A67' }}
+        buttonStyle={{ borderColor: '#3C1A67' }}
         containerStyle={styles.button}
         type="outline"
         title="Register"
