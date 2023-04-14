@@ -1,8 +1,8 @@
-import { React, useState } from 'react'
+import { React, useState, useLayoutEffect } from 'react'
 
-import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
+import { StyleSheet, View, KeyboardAvoidingView } from 'react-native'
 
-import { Button, Input } from '@rneui/base'
+import { Button, Input, Text } from '@rneui/base'
 
 import { StatusBar } from 'expo-status-bar'
 
@@ -11,6 +11,14 @@ const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [imageUrl, setImageUrl] = useState('')
+
+  //doesn't work on android, so appledicks wont see this too
+
+  // useLayoutEffect(() => {
+  //   navigation.setOptions({
+  //     headerBackTitle: 'Abc',
+  //   })
+  // }, [navigation])
 
   const register = () => {}
 
@@ -49,6 +57,14 @@ const RegisterScreen = ({ navigation }) => {
           onSubmitEditing={register}
         />
       </View>
+
+      <Button
+        containerStyle={styles.button}
+        raised
+        color="#3C1A67"
+        onPress={register}
+        title="Register"
+      />
     </KeyboardAvoidingView>
   )
 }
@@ -56,5 +72,18 @@ const RegisterScreen = ({ navigation }) => {
 export default RegisterScreen
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    backgroundColor: 'white',
+  },
+  button: {
+    width: 200,
+    marginTop: 10,
+  },
+  inputContainer: {
+    width: 300,
+  },
 })

@@ -37,14 +37,14 @@ const LoginScreen = ({ navigation }) => {
         />
       </View>
       <Button
-        color="#67437F"
+        color="#3C1A67"
         containerStyle={styles.button}
         onPress={signIn}
         title="Login"
       />
       <Button
         onPress={() => navigation.navigate('Register')}
-        titleStyle={{ color: '#67437F' }}
+        titleStyle={{ color: '#3C1A67' }}
         containerStyle={styles.button}
         type="outline"
         title="Register"

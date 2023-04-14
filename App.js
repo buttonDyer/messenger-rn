@@ -6,14 +6,15 @@ import { createStackNavigator } from '@react-navigation/stack'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
 
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 
 const Stack = createStackNavigator()
 
 const globalScreenOptions = {
-  headerStyle: { backgroundColor: '#67437F' },
+  headerStyle: { backgroundColor: '#3C1A67' },
   headerTitleStyle: { color: 'white' },
   headerTintColor: 'white',
+  headerTitleAlign: 'center',
 }
 
 export default function App() {
