@@ -13,7 +13,7 @@ const AddChat = ({ navigation }) => {
   const [input, setInput] = useState('')
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: 'Add a new Chat',
+      title: 'Talk to Gigachad',
     })
   }, [navigation])
 
@@ -37,7 +37,12 @@ const AddChat = ({ navigation }) => {
         onSubmitEditing={createChat}
         leftIcon={<Entypo name="chat" size={24} color="#3C1A67" />}
       />
-      <Button onPress={createChat} title="Create new Chat" />
+      <Button
+        onPress={createChat}
+        color="#3C1A67"
+        containerStyle={styles.button}
+        title="Create new Chat"
+      />
     </View>
   )
 }
