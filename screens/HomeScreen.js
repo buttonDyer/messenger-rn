@@ -38,10 +38,9 @@ const HomeScreen = ({ navigation }) => {
             <Avatar
               rounded
               source={{
-                uri: 'https://img.rl0.ru/afisha/e630x315p0x0f1260x720q85i/s2.afisha.ru/mediastorage/89/90/9a6f49ac22c042c6b13b44f99089.jpeg',
+                uri: auth?.currentUser?.photoURL,
               }}
             />
-            {/* auth?.currentUser?.photoURL */}
           </TouchableOpacity>
         </View>
       ),
@@ -55,9 +54,9 @@ const HomeScreen = ({ navigation }) => {
               marginRight: 20,
             }}
           >
-            {/* <TouchableOpacity activeOpacity={0.5}>
+            <TouchableOpacity activeOpacity={0.5}>
               <AntDesign name="camera" size={24} color="#3C1A67" />
-            </TouchableOpacity> */}
+            </TouchableOpacity>
             <TouchableOpacity
               onPress={() => navigation.navigate('AddChat')}
               activeOpacity={0.5}
