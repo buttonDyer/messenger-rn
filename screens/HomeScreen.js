@@ -12,7 +12,7 @@ import CustomListItem from '../components/CustomListItem'
 
 import { Avatar } from '@rneui/base'
 
-import { AntDesign, Entypo } from '@expo/vector-icons'
+import { Entypo } from '@expo/vector-icons'
 
 import { auth, db } from '../firebase'
 import { collection, onSnapshot } from 'firebase/firestore'
@@ -66,13 +66,9 @@ const HomeScreen = ({ navigation }) => {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
-              width: 80,
               marginRight: 20,
             }}
           >
-            <TouchableOpacity activeOpacity={0.5}>
-              <AntDesign name="camera" size={24} color="#3C1A67" />
-            </TouchableOpacity>
             <TouchableOpacity
               onPress={() => navigation.navigate('AddChat')}
               activeOpacity={0.5}

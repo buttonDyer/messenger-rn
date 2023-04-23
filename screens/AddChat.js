@@ -1,10 +1,11 @@
 import React, { useLayoutEffect, useState } from 'react'
 
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 
 import { Button, Input } from '@rneui/base'
 
 import { Entypo } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons'
 
 import { db } from '../firebase'
 import { collection, addDoc } from 'firebase/firestore'
@@ -14,6 +15,16 @@ const AddChat = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: 'Talk to Gigachad',
+      headerLeft: () => (
+        <TouchableOpacity
+          style={{
+            marginLeft: 10,
+          }}
+          onPress={navigation.goBack}
+        >
+          <AntDesign name="arrowleft" size={24} color="white" />
+        </TouchableOpacity>
+      ),
     })
   }, [navigation])
 
