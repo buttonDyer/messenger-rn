@@ -7,7 +7,6 @@ import { Button, Input, Image } from '@rneui/base'
 import { StatusBar } from 'expo-status-bar'
 
 import { auth } from '../firebase'
-
 import { signInWithEmailAndPassword } from 'firebase/auth'
 
 const LoginScreen = ({ navigation }) => {
