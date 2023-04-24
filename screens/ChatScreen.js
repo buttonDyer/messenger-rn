@@ -1,12 +1,25 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  SafeAreaView,
+  StatusBar,
+  KeyboardAvoidingView,
+  ScrollView,
+  TextInput,
+} from 'react-native'
 
-import { React, useLayoutEffect } from 'react'
+import { React, useLayoutEffect, useState } from 'react'
 
 import { Avatar } from '@rneui/base'
 
 import { AntDesign } from '@expo/vector-icons'
+import { FontAwesome } from '@expo/vector-icons'
 
 const ChatScreen = ({ navigation, route }) => {
+  const [input, setInput] = useState('')
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: 'Chat',
@@ -45,21 +58,56 @@ const ChatScreen = ({ navigation, route }) => {
           <AntDesign name="arrowleft" size={24} color="white" />
         </TouchableOpacity>
       ),
-      headerRight: () => (
-        <View>
-          <TouchableOpacity></TouchableOpacity>
-        </View>
-      ),
     })
   }, [navigation])
 
+  const sendMessage = () => {}
+
   return (
-    <View>
-      <Text>{route.params.chatName}</Text>
-    </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <StatusBar style="auto" />
+      <KeyboardAvoidingView
+        style={styles.container}
+        keyboardVerticalOffset={90}
+      >
+        <ScrollView>{/* Chat */}</ScrollView>
+        <View style={styles.footer}>
+          <TextInput
+            value={input}
+            onChangeText={(text) => setInput(text)}
+            placeholder="The Boss's message"
+            style={styles.textInput}
+          />
+          <TouchableOpacity onPress={sendMessage} activeOpacity={0.5}>
+            <FontAwesome name="send" size={24} color="#3C1A67" />
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   )
 }
 
 export default ChatScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  footer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    padding: 15,
+  },
+  textInput: {
+    bottom: 0,
+    height: 40,
+    flex: 1,
+    marginRight: 15,
+    borderColor: 'transparent',
+    backgroundColor: '#ECECEC',
+    padding: 10,
+    color: 'grey',
+    borderRadius: 30,
+  },
+})
