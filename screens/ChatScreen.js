@@ -8,6 +8,8 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   TextInput,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from 'react-native'
 
 import { React, useLayoutEffect, useState } from 'react'
@@ -16,6 +18,10 @@ import { Avatar } from '@rneui/base'
 
 import { AntDesign } from '@expo/vector-icons'
 import { FontAwesome } from '@expo/vector-icons'
+
+import firebase from 'firebase/app'
+
+import { auth, db } from '../firebase'
 
 const ChatScreen = ({ navigation, route }) => {
   const [input, setInput] = useState('')
@@ -61,7 +67,19 @@ const ChatScreen = ({ navigation, route }) => {
     })
   }, [navigation])
 
-  const sendMessage = () => {}
+  const sendMessage = () => {
+    Keyboard.dismiss()
+
+    db.collection('chats').doc(route.params.id).collection('messages').add({
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      message: input,
+      displayName: auth.currentUser.displayName,
+      email: auth.currentUser.email,
+      photoURL: auth.currentUser.photoURL,
+    })
+
+    setInput('')
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
@@ -70,18 +88,23 @@ const ChatScreen = ({ navigation, route }) => {
         style={styles.container}
         keyboardVerticalOffset={90}
       >
-        <ScrollView>{/* Chat */}</ScrollView>
-        <View style={styles.footer}>
-          <TextInput
-            value={input}
-            onChangeText={(text) => setInput(text)}
-            placeholder="The Boss's message"
-            style={styles.textInput}
-          />
-          <TouchableOpacity onPress={sendMessage} activeOpacity={0.5}>
-            <FontAwesome name="send" size={24} color="#3C1A67" />
-          </TouchableOpacity>
-        </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <>
+            <ScrollView>{/* Chat */}</ScrollView>
+            <View style={styles.footer}>
+              <TextInput
+                value={input}
+                onChangeText={(text) => setInput(text)}
+                onSubmitEditing={sendMessage}
+                placeholder="The Boss's message"
+                style={styles.textInput}
+              />
+              <TouchableOpacity onPress={sendMessage} activeOpacity={0.5}>
+                <FontAwesome name="send" size={24} color="#3C1A67" />
+              </TouchableOpacity>
+            </View>
+          </>
+        </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </SafeAreaView>
   )
